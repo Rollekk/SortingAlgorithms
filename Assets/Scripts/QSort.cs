@@ -7,7 +7,7 @@ public class QSort : SortingAlgorithm
     // Start is called before the first frame update
     void Start()
     {
-        spawnerController.choosenAlgorithm = this;
+        //spawnerController.choosenAlgorithm = this;
         if (spawnerController.choosenAlgorithm != this) gameObject.SetActive(false);
     }
 
