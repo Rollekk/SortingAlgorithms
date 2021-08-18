@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BSort : SortingAlgorithm
+public class SSort : SortingAlgorithm
 {
     // Start is called before the first frame update
     void Start()
     {
+        spawnerController.choosenAlgorithm = this;
         if (spawnerController.choosenAlgorithm != this) gameObject.SetActive(false);
     }
 
@@ -18,17 +19,19 @@ public class BSort : SortingAlgorithm
 
     public override void Sort(int[] array, int left, int right)
     {
-        for (int j = 0; j <= array.Length - 2; j++)
+        for (int i = 0; i < array.Length - 1; i++)
         {
-            for (int i = 0; i <= array.Length - 2; i++)
+            int smallest = i;
+            for (int j = i + 1; j < array.Length; j++)
             {
-                if (array[i] > array[i + 1])
+                if (array[j] < array[smallest])
                 {
-                    int temp = array[i + 1];
-                    array[i + 1] = array[i];
-                    array[i] = temp;
+                    smallest = j;
                 }
             }
+            int temp = array[smallest];
+            array[smallest] = array[i];
+            array[i] = temp;
         }
     }
 }
