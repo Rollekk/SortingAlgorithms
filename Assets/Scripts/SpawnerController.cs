@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnerController : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] QSort choosenAlgorithm = null; //Choosen algorithm with starting UI
+    public SortingAlgorithm choosenAlgorithm = null; //Choosen algorithm with starting UI
     CubeController spawnedCube = null; //Script for cube controller, attached to each cube
     public GameObject cubeToSpawn = null; //Prefab of cube to spawn
 

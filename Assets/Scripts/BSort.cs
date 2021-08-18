@@ -2,16 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SortingAlgorithm : MonoBehaviour
+public class BSort : SortingAlgorithm
 {
-    //class made for inheritance
-    [Header("Components")]
-    public SpawnerController spawnerController = null;
-
     // Start is called before the first frame update
     void Start()
     {
-
+        if (spawnerController.choosenAlgorithm != this) gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,8 +16,8 @@ public class SortingAlgorithm : MonoBehaviour
         
     }
 
-    virtual public void Sort(int[] array, int left, int right)
+    public override void Sort(int[] array, int left, int right)
     {
-
+        
     }
 }
