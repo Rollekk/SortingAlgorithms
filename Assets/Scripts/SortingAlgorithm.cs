@@ -7,7 +7,7 @@ public class SortingAlgorithm : MonoBehaviour
 {
 
     [Header("Components")]
-    public SpawnerController spawnerController = null; //Component needed for setting choosen Algorithm
+    public SpawnerController spawnerController = null; //Component needed for setting chosen Algorithm
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -30,6 +30,6 @@ public class SortingAlgorithm : MonoBehaviour
     //Used when button is clicked in UI
     public void SetAlgorithm()
     {
-        spawnerController.choosenAlgorithm = this;
+        spawnerController.chosenAlgorithm = this;
     }
 }

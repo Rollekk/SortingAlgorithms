@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnerController : MonoBehaviour
 {
     [Header("Components")]
-    public SortingAlgorithm choosenAlgorithm = null; //Choosen algorithm with starting UI
+    public SortingAlgorithm chosenAlgorithm = null; //Choosen algorithm with starting UI
     CubeController spawnedCube = null; //Script for cube controller, attached to each cube
     public GameObject cubeToSpawn = null; //Prefab of cube to spawn
 
@@ -32,7 +32,7 @@ public class SpawnerController : MonoBehaviour
     void Update()
     {
         //Check if there is any Algorithm
-        if(choosenAlgorithm)
+        if(chosenAlgorithm)
         {
             //if there is, start the game
             if (canMoveToNext) MoveSpawnerToNextLocation(); //When spawner can move, move to next location
@@ -63,14 +63,14 @@ public class SpawnerController : MonoBehaviour
         numberOfSpawnedCubes++;
     }
 
-    //Apply choosen sorting algorithm to cubes
+    //Apply chosen sorting algorithm to cubes
     void SortAllCubes()
     {
         //Create init array made of cube list
         int[] tmpArray = cubesNumbers.ToArray();
 
         //Sort just array 
-        choosenAlgorithm.Sort(tmpArray, 0, spawnedCubes.Count - 1);
+        chosenAlgorithm.Sort(tmpArray, 0, spawnedCubes.Count - 1);
 
         //Clear list and add all sorted elements
         cubesNumbers.Clear();

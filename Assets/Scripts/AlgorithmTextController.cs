@@ -24,13 +24,13 @@ public class AlgorithmTextController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawnerController.choosenAlgorithm) SetAglorithmName();
+        if (spawnerController.chosenAlgorithm) SetAglorithmName();
     }
 
     void SetAglorithmName()
     {
         algorithmName.enabled = true;
-        algorithmName.text = spawnerController.choosenAlgorithm.name;
+        algorithmName.text = spawnerController.chosenAlgorithm.name;
         gameObject.GetComponent<AlgorithmTextController>().enabled = false;
     }
 }
