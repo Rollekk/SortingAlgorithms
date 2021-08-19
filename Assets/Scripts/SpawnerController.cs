@@ -31,14 +31,19 @@ public class SpawnerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canMoveToNext) MoveSpawnerToNextLocation(); //When spawner can move, move to next location
-        else if (!isSpawned && numberOfSpawnedCubes < maxSpawnedObjects) //If spawner can't move just spawn another cube
+        //Check if there is any Algorithm
+        if(choosenAlgorithm)
         {
-            isSpawned = true;
-            SpawnNewCube();
+            //if there is, start the game
+            if (canMoveToNext) MoveSpawnerToNextLocation(); //When spawner can move, move to next location
+            else if (!isSpawned && numberOfSpawnedCubes < maxSpawnedObjects) //If spawner can't move just spawn another cube
+            {
+                isSpawned = true;
+                SpawnNewCube();
+            }
+            //If its not sorting currenlty and all cubes have been spawned, Sort with selected algirthm
+            if (!isSorting && !isSpawned && numberOfSpawnedCubes >= maxSpawnedObjects) SortAllCubes();
         }
-        //If its not sorting currenlty and all cubes have been spawned, Sort with selected algirthm
-        if (!isSorting && numberOfSpawnedCubes >= maxSpawnedObjects) SortAllCubes(); 
     }
 
     //Spawn new cube, set its parameters and add it to list

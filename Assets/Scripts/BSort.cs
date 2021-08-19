@@ -5,9 +5,9 @@ using UnityEngine;
 public class BSort : SortingAlgorithm
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        if (spawnerController.choosenAlgorithm != this) gameObject.SetActive(false);
+        base.Start();
     }
 
     // Update is called once per frame
@@ -16,6 +16,7 @@ public class BSort : SortingAlgorithm
         
     }
 
+    //Bubble sort algorithm
     public override void Sort(int[] array, int left, int right)
     {
         for (int j = 0; j <= array.Length - 2; j++)

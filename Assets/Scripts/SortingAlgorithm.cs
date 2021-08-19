@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Class made for inheritance
 public class SortingAlgorithm : MonoBehaviour
 {
-    //class made for inheritance
+
     [Header("Components")]
-    public SpawnerController spawnerController = null;
+    public SpawnerController spawnerController = null; //Component needed for setting choosen Algorithm
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,8 +21,15 @@ public class SortingAlgorithm : MonoBehaviour
         
     }
 
+    //Used to override and implement specific algorithm
     virtual public void Sort(int[] array, int left, int right)
     {
 
+    }
+
+    //Used when button is clicked in UI
+    public void SetAlgorithm()
+    {
+        spawnerController.choosenAlgorithm = this;
     }
 }

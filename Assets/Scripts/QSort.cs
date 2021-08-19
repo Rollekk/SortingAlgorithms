@@ -5,10 +5,9 @@ using UnityEngine;
 public class QSort : SortingAlgorithm
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        //spawnerController.choosenAlgorithm = this;
-        if (spawnerController.choosenAlgorithm != this) gameObject.SetActive(false);
+        base.Start();
     }
 
     // Update is called once per frame
