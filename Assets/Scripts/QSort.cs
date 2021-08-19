@@ -17,20 +17,23 @@ public class QSort : SortingAlgorithm
     }
 
     //Quick sort algorithm
-    public override void Sort(int[] array, int left, int right)
+    public override void Sort(CubeController[] array, int left, int right)
     {
         var i = left;
         var j = right;
-        var pivot = array[(left + right) / 2];
+        var pivot = array[(left + right) / 2].cubeNumber;
         while (i < j)
         {
-            while (array[i] < pivot) i++;
-            while (array[j] > pivot) j--;
+            while (array[i].cubeNumber < pivot) i++;
+            while (array[j].cubeNumber > pivot) j--;
             if (i <= j)
             {
-                // swap
-                var tmp = array[i];
-                array[i++] = array[j];  // ++ and -- inside array braces for shorter code
+                //Swaps positions of cubes in game
+                SwapPosition(array, i, j);
+
+                //Swaps positions of cubes in given array
+                CubeController tmp = array[i];
+                array[i++] = array[j];
                 array[j--] = tmp;
             }
         }

@@ -17,19 +17,23 @@ public class SSort : SortingAlgorithm
     }
 
     //Selection sort algorithm
-    public override void Sort(int[] array, int left, int right)
+    public override void Sort(CubeController[] array, int left, int right)
     {
         for (int i = 0; i < array.Length - 1; i++)
         {
             int smallest = i;
             for (int j = i + 1; j < array.Length; j++)
             {
-                if (array[j] < array[smallest])
+                if (array[j].cubeNumber < array[smallest].cubeNumber)
                 {
                     smallest = j;
                 }
             }
-            int temp = array[smallest];
+            //Swaps positions of cubes in game
+            SwapPosition(array, smallest, i);
+
+            //Swaps positions of cubes in given array
+            CubeController temp = array[smallest];
             array[smallest] = array[i];
             array[i] = temp;
         }

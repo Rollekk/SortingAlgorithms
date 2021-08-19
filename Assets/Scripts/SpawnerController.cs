@@ -5,15 +5,14 @@ using UnityEngine;
 public class SpawnerController : MonoBehaviour
 {
     [Header("Components")]
-    public SortingAlgorithm chosenAlgorithm = null; //Choosen algorithm with starting UI
+    public SortingAlgorithm chosenAlgorithm = null; //Reference to chosen algorithm used for sorting and starting game
+    public SortingController sortingController = null; //Reference to controller used for sorting
     CubeController spawnedCube = null; //Script for cube controller, attached to each cube
     public GameObject cubeToSpawn = null; //Prefab of cube to spawn
 
     [Header("Cubes")]
     [SerializeField] List<CubeController> spawnedCubes = new List<CubeController>(); //list of spawnedCubes
-    [SerializeField] List<int> cubesNumbers = new List<int>(); //list of cubes numbers that were generated
     [SerializeField] bool isSpawned = false; //can next cube be spawned
-    bool isSorting = false; //is algorithm sorting at that moment
 
     public int maxSpawnedObjects = 10; //maximum objects that can be spawned
     int numberOfSpawnedCubes = 0; //current number of spawned objects
@@ -42,7 +41,8 @@ public class SpawnerController : MonoBehaviour
                 SpawnNewCube();
             }
             //If its not sorting currenlty and all cubes have been spawned, Sort with selected algirthm
-            if (!isSorting && !isSpawned && numberOfSpawnedCubes >= maxSpawnedObjects) SortAllCubes();
+            if (!sortingController.isSorting && !isSpawned && numberOfSpawnedCubes >= maxSpawnedObjects)
+                sortingController.SortAllCubes(spawnedCubes);
         }
     }
 
@@ -57,25 +57,9 @@ public class SpawnerController : MonoBehaviour
 
         //Add cube to list of cubes
         spawnedCubes.Add(spawnedCube);
-        cubesNumbers.Add(spawnedCube.cubeNumber);
 
         //Increment number of generated cubes
         numberOfSpawnedCubes++;
-    }
-
-    //Apply chosen sorting algorithm to cubes
-    void SortAllCubes()
-    {
-        //Create init array made of cube list
-        int[] tmpArray = cubesNumbers.ToArray();
-
-        //Sort just array 
-        chosenAlgorithm.Sort(tmpArray, 0, spawnedCubes.Count - 1);
-
-        //Clear list and add all sorted elements
-        cubesNumbers.Clear();
-        cubesNumbers.AddRange(tmpArray);
-        isSorting = true;
     }
 
     //Move spanwer object to next position
