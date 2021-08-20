@@ -244,8 +244,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42620609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.2985897, y: -0.8147617, z: -2.2950964}
-  m_LocalScale: {x: 3.5884812, y: 0.54269, z: 0.81287}
+  m_LocalPosition: {x: 3.99, y: -0.8147617, z: -2.2950964}
+  m_LocalScale: {x: 7.1511254, y: 0.54269, z: 0.81287}
   m_Children: []
   m_Father: {fileID: 21910294}
   m_RootOrder: 1
@@ -1079,7 +1079,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.24329798, y: -0, z: -0, w: 0.9699516}
-  m_LocalPosition: {x: 2.6685896, y: 1.159, z: -4.482}
+  m_LocalPosition: {x: 3.989, y: 1.159, z: -5.477}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 431671535}
@@ -1432,7 +1432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 17.709, y: -0.662, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.396, y: -0.815}
+  m_AnchoredPosition: {x: 4.09, y: -0.815}
   m_SizeDelta: {x: 2.2475, y: 0.4079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1096699367
@@ -1778,6 +1778,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!4 &1306943593 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 675026044236747010, guid: 4baacba1707f4224785d39818127c408, type: 3}
+  m_PrefabInstance: {fileID: 675026042762633676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1316915537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,6 +1981,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnerController: {fileID: 919022565}
+  rightSide: 
+  rightSideIndex: 0
 --- !u!4 &1837825558
 Transform:
   m_ObjectHideFlags: 0
@@ -2045,6 +2052,18 @@ PrefabInstance:
     - target: {fileID: 675026043547290148, guid: 4baacba1707f4224785d39818127c408, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 675026043547290153, guid: 4baacba1707f4224785d39818127c408, type: 3}
+      propertyPath: spawnTransform
+      value: 
+      objectReference: {fileID: 1306943593}
+    - target: {fileID: 675026043547290153, guid: 4baacba1707f4224785d39818127c408, type: 3}
+      propertyPath: spawnerMoveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 675026043547290153, guid: 4baacba1707f4224785d39818127c408, type: 3}
+      propertyPath: maxSpawnedObjects
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 675026043547290153, guid: 4baacba1707f4224785d39818127c408, type: 3}
       propertyPath: sortingController

@@ -9,6 +9,7 @@ public class SpawnerController : MonoBehaviour
     public SortingController sortingController = null; //Reference to controller used for sorting
     CubeController spawnedCube = null; //Script for cube controller, attached to each cube
     public GameObject cubeToSpawn = null; //Prefab of cube to spawn
+    public Transform spawnTransform = null; //spawnPoint transform
 
     [Header("Cubes")]
     [SerializeField] List<CubeController> spawnedCubes = new List<CubeController>(); //list of spawnedCubes
@@ -26,6 +27,9 @@ public class SpawnerController : MonoBehaviour
     Vector3 spawnerStartingLocation; //Starting location of moving spawner
     Vector3 spawnerEndingLocation; //Ending location of moving spawner
 
+    private void Start()
+    {
+    }
 
     // Update is called once per frame
     void Update()
@@ -50,7 +54,7 @@ public class SpawnerController : MonoBehaviour
     void SpawnNewCube()
     {
         //Spawn new cube and set its parameters
-        spawnedCube = Instantiate(cubeToSpawn, transform.position, transform.rotation).GetComponentInChildren<CubeController>();
+        spawnedCube = Instantiate(cubeToSpawn, spawnTransform.position, transform.rotation).GetComponentInChildren<CubeController>();
         //Generate cube number
         spawnedCube.GenerateCubeNumber();
         spawnedCube.spawnerController = this;

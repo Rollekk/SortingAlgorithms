@@ -13,11 +13,19 @@ public class CubeController : MonoBehaviour
     [HideInInspector] public SpawnerController spawnerController; //spawner controller needed for using methods
     bool shouldSet = true; //should cube set new location
 
+    [Header("Colors")]
+    Color initialColor;
+
     //Whenever game is launched
     private void Awake()
     {
         //Get TMP component
         numberTMP = GetComponentInChildren<TMP_Text>();
+    }
+
+    private void Start()
+    {
+        initialColor = gameObject.GetComponent<Renderer>().material.color;
     }
 
     //Generates new random cube number from 0 to 100
@@ -40,5 +48,17 @@ public class CubeController : MonoBehaviour
             spawnerController.SetSpawnerNewLocation();
             shouldSet = false;
         }
+    }
+
+    public void SetCubeToColor(Color color)
+    {
+        //if(gameObject.GetComponent<Renderer>().sharedMaterial.color != Color.green)
+            gameObject.GetComponent<Renderer>().sharedMaterial.color = color;
+    }
+
+    public void ResetCubeColor()
+    {
+        //if (gameObject.GetComponent<Renderer>().sharedMaterial.color != Color.green)
+            gameObject.GetComponent<Renderer>().sharedMaterial.color = initialColor;
     }
 }

@@ -22,21 +22,15 @@ public class SortingAlgorithm : MonoBehaviour
     }
 
     //Used to override and implement specific algorithm
-    virtual public void Sort(CubeController[] array, int left, int right)
+    virtual public IEnumerator Sort(CubeController[] array, int left, int right)
     {
-
+        return null;
     }
 
     //Used when button is clicked in UI
     public void SetAlgorithm()
     {
         spawnerController.chosenAlgorithm = this;
-    }
-
-    virtual protected void SwapPosition(CubeController[] array, int i, int j)
-    {
-        Vector3 tmpPos = array[i].transform.position;
-        array[i++].transform.position = array[j].transform.position;
-        array[j--].transform.position = tmpPos;
+        gameObject.SetActive(true);
     }
 }

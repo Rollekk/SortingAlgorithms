@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6927392148715808938}
   - component: {fileID: 9187875141974756549}
   - component: {fileID: 7387264423143275992}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NumberText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 7038038026681501353}
   - component: {fileID: 8247188359120590315}
   - component: {fileID: 9016292739814912250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SortCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

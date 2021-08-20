@@ -32,7 +32,7 @@ public class SortingController : MonoBehaviour
         CubeController[] tmpArray = spawnedCubes.ToArray();
 
         //Sort just array 
-        chosenAlgorithm.Sort(tmpArray, 0, spawnedCubes.Count - 1);
+        StartCoroutine(chosenAlgorithm.Sort(tmpArray, 0, spawnedCubes.Count - 1));
 
         //Clear list and add all sorted elements
         spawnedCubes.Clear();
