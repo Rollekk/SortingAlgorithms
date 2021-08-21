@@ -10,19 +10,13 @@ public class BSort : SortingAlgorithm
         base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //Bubble sort algorithm
     public override IEnumerator Sort(CubeController[] array, int left, int right)
     {
         for (int j = 0; j < array.Length - 1; j++)
         {
-            //reset not in place cubes for new iteration
-            foreach (CubeController cube in array) cube.ResetCubeColor();
+            foreach (CubeController cube in array) cube.ResetCubeColor(); //reset not in place cubes for new iteration
+
             for (int i = 0; i < array.Length - (1 + j); i++)
             {
                 array[i].SetCubeToColor(Color.blue); //mark as blue next cubes to check
@@ -32,7 +26,6 @@ public class BSort : SortingAlgorithm
                 //Check if current cubeNumber is bigger than next one
                 if (array[i].cubeNumber > array[i + 1].cubeNumber)
                 {
-                    //if it is change their positions
                     array[i].SetCubeToColor(Color.red);  //mark as red cubes to move
                     array[i + 1].SetCubeToColor(Color.red); //mark as red cubes to move
                     yield return new WaitForSeconds(sortTime);
