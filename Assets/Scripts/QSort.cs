@@ -12,81 +12,76 @@ public class QSort : SortingAlgorithm
         base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //Quick sort algorithm
     public override IEnumerator Sort(CubeController[] array, int left, int right)
     {
         int i = left;
         int j = right;
         CubeController pivot = array[(left + right) / 2];
-        Debug.Log(pivot.cubeNumber);
-        pivot.SetCubeToColor(Color.white);
+        pivot.SetCubeToColor(Color.magenta); // mark as magenta pivot cube
         //While left and right side are not close to eachother, check...
         while (i < j)
         {
-            array[i].SetCubeToColor(Color.blue);
-            array[j].SetCubeToColor(Color.blue);
-            yield return new WaitForSeconds(1.0f);
+            array[i].SetCubeToColor(Color.blue); // mark as blue next cube to check
+            array[j].SetCubeToColor(Color.blue); // mark as blue next cube to check
+            yield return new WaitForSeconds(sortTime);
+
             //if number in array on left is less than pivot
             while (array[i].cubeNumber < pivot.cubeNumber)
             {
-                //move to another
-                array[i].SetCubeToColor(Color.gray);
-                grayCubes.Add(array[i]);
+                //move to another cube
+                array[i].SetCubeToColor(Color.gray); // mark as grey cube that have been checked
+                grayCubes.Add(array[i]); //add already checked cube as grey and add it to list to reset it later
                 i++;
-                array[i].SetCubeToColor(Color.blue);
-                yield return new WaitForSeconds(1.0f);
+                array[i].SetCubeToColor(Color.blue); // mark as blue next cube to check
+                yield return new WaitForSeconds(sortTime);
             }
             //if number in array on right is more than pivot
             while (array[j].cubeNumber > pivot.cubeNumber)
             {
-                //move to another
-                array[j].SetCubeToColor(Color.gray);
-                grayCubes.Add(array[j]);
+                //move to another cube
+                array[j].SetCubeToColor(Color.gray); //mark as grey cubes already checked
+                grayCubes.Add(array[j]); //add already checked cube as grey and add it to list to reset it later
                 j--;
-                array[j].SetCubeToColor(Color.blue);
-                yield return new WaitForSeconds(1.0f);
+                array[j].SetCubeToColor(Color.blue); //mark as blue next cube to check
+                yield return new WaitForSeconds(sortTime);
             }
 
-            array[i].ResetCubeColor();
-            array[j].ResetCubeColor();
+            //array[i].ResetCubeColor();
+            //array[j].ResetCubeColor();
 
             //check if left index is not on right index
             if (i <= j)
             {
+                //mark as blue cubes that will be moved
                 array[i].SetCubeToColor(Color.red);
                 array[j].SetCubeToColor(Color.red);
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(sortTime);
 
                 //Swaps positions of cubes in game
                 var tmp2 = array[i].transform.position;
                 array[i].transform.position = array[j].transform.position;
-                array[i].SetCubeToColor(Color.grey);
+                array[i].SetCubeToColor(Color.grey); //mark as grey cubes already checked
 
                 array[j].transform.position = tmp2;
-                array[j].SetCubeToColor(Color.grey);
-                yield return new WaitForSeconds(1.0f);
+                array[j].SetCubeToColor(Color.grey); //mark as grey cubes already checked
+                yield return new WaitForSeconds(sortTime);
 
-                //if it's not swap elements in array
+                //swap cubes in given array
                 CubeController tmp = array[i];
                 array[i++] = array[j];
                 array[j--] = tmp;
             }
 
         }
-
+        //reset all cubes colors for next loop iteration
         foreach (CubeController cube in grayCubes) cube.ResetCubeColor();
         //pivot.SetCubeToColor(Color.green);
 
+        //Start recursion with coroutine, to wait for both sides to finish
         yield return StartCoroutine(SortSideArrays(left, j, right, i, array));
 
         //foreach (var cube in array) cube.SetCubeToColor(Color.green);
-        //if pivot changes positions dont make it green
     }
 
     IEnumerator SortSideArrays(int left, int j, int right, int i, CubeController[] array)

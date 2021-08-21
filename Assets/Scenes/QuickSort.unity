@@ -537,6 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnerController: {fileID: 919022565}
+  sortTime: 1
 --- !u!1 &475342898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,6 +1250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnerController: {fileID: 919022565}
+  sortTime: 0.3
 --- !u!4 &1038795320
 Transform:
   m_ObjectHideFlags: 0
@@ -1981,8 +1983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnerController: {fileID: 919022565}
-  rightSide: 
-  rightSideIndex: 0
+  sortTime: 1
 --- !u!4 &1837825558
 Transform:
   m_ObjectHideFlags: 0
@@ -2059,7 +2060,7 @@ PrefabInstance:
       objectReference: {fileID: 1306943593}
     - target: {fileID: 675026043547290153, guid: 4baacba1707f4224785d39818127c408, type: 3}
       propertyPath: spawnerMoveSpeed
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 675026043547290153, guid: 4baacba1707f4224785d39818127c408, type: 3}
       propertyPath: maxSpawnedObjects

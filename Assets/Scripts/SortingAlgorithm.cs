@@ -8,6 +8,7 @@ public class SortingAlgorithm : MonoBehaviour
 
     [Header("Components")]
     public SpawnerController spawnerController = null; //Component needed for setting chosen Algorithm
+    public float sortTime = 1.0f;
 
     // Start is called before the first frame update
     protected virtual void Start()

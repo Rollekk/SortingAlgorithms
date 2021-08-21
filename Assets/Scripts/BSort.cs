@@ -16,24 +16,49 @@ public class BSort : SortingAlgorithm
         
     }
 
-    ////Bubble sort algorithm
-    //public override void Sort(CubeController[] array, int left, int right)
-    //{
-    //    for (int j = 0; j <= array.Length - 2; j++)
-    //    {
-    //        for (int i = 0; i <= array.Length - 2; i++)
-    //        {
-    //            if (array[i].cubeNumber > array[i + 1].cubeNumber)
-    //            {
-    //                //Swaps positions of cubes in game
-    //                SwapPosition(array, i, i + 1);
+    //Bubble sort algorithm
+    public override IEnumerator Sort(CubeController[] array, int left, int right)
+    {
+        for (int j = 0; j < array.Length - 1; j++)
+        {
+            //reset not in place cubes for new iteration
+            foreach (CubeController cube in array) cube.ResetCubeColor();
+            for (int i = 0; i < array.Length - (1 + j); i++)
+            {
+                array[i].SetCubeToColor(Color.blue); //mark as blue next cubes to check
+                array[i + 1].SetCubeToColor(Color.blue);  //mark as blue next cubes to check
+                yield return new WaitForSeconds(sortTime);
 
-    //                //Swaps positions of cubes in given array
-    //                CubeController temp = array[i + 1];
-    //                array[i + 1] = array[i];
-    //                array[i] = temp;
-    //            }
-    //        }
-    //    }
-    //}
+                //Check if current cubeNumber is bigger than next one
+                if (array[i].cubeNumber > array[i + 1].cubeNumber)
+                {
+                    //if it is change their positions
+                    array[i].SetCubeToColor(Color.red);  //mark as red cubes to move
+                    array[i + 1].SetCubeToColor(Color.red); //mark as red cubes to move
+                    yield return new WaitForSeconds(sortTime);
+
+                    //Swap positions of cubes in game
+                    var tmp = array[i + 1].transform.position;
+                    array[i + 1].transform.position = array[i].transform.position;
+                    array[i + 1].SetCubeToColor(Color.grey);  //mark as grey cubes already moved
+
+                    array[i].transform.position = tmp;
+                    array[i].ResetCubeColor(); 
+
+                    //Swaps positions of cubes in given array
+                    CubeController temp = array[i + 1];
+                    array[i + 1] = array[i];
+                    array[i] = temp;
+                    yield return new WaitForSeconds(sortTime);
+                }
+                else
+                {
+                    array[i].SetCubeToColor(Color.grey); //mark as grey cubes already checked
+                }
+                //if its last iteration, mark last cube as in place (green color)
+                if (i + 1 == array.Length - (1 + j)) array[i + 1].SetCubeToColor(Color.green);
+            }
+        }
+        array[0].SetCubeToColor(Color.green); //mark as green first cube at the end of all iterations
+    }
 }

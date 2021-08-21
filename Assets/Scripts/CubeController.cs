@@ -58,7 +58,7 @@ public class CubeController : MonoBehaviour
 
     public void ResetCubeColor()
     {
-        //if (gameObject.GetComponent<Renderer>().sharedMaterial.color != Color.green)
+        if (gameObject.GetComponent<Renderer>().sharedMaterial.color != Color.green)
             gameObject.GetComponent<Renderer>().sharedMaterial.color = initialColor;
     }
 }
