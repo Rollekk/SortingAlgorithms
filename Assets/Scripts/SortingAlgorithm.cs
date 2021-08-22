@@ -8,6 +8,7 @@ public class SortingAlgorithm : MonoBehaviour
 
     [Header("Components")]
     public SpawnerController spawnerController = null; //Component needed for setting chosen Algorithm
+    public SortingController sortingController = null; //Component needed for using sorting methods
     public float sortSpeed = 1.0f; //time for how fast should algorithm sort
 
     [SerializeField] protected GameUIController gameUI = null; //UI 

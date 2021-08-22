@@ -45,7 +45,7 @@ public class CubeController : MonoBehaviour
         if (collision.collider.CompareTag("Ground") && shouldSet)
         {
             //if it is set new location, once
-            spawnerController.SetSpawnerNewLocation();
+            spawnerController.SetNewLocation();
             shouldSet = false;
         }
     }
