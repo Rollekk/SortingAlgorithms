@@ -19,6 +19,7 @@ public class SpawnerController : MonoBehaviour
     int numberOfSpawnedCubes = 0; //current number of spawned objects
 
     [Header("Spawner")]
+    public bool canStartGame = false; //can the game be started/ui is hidden, algorithm is chosen
     float lerpTimer = 0.0f; //Timer for lerping between two vectors
     [SerializeField] float spawnerMoveSpeed = 0.1f; //Speed withi which spawner is moving
     [SerializeField] float spawnerStep = 0.5f; //Amount of distance between points that spawn cubes
@@ -27,15 +28,11 @@ public class SpawnerController : MonoBehaviour
     Vector3 spawnerStartingLocation; //Starting location of moving spawner
     Vector3 spawnerEndingLocation; //Ending location of moving spawner
 
-    private void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
         //Check if there is any Algorithm
-        if(chosenAlgorithm)
+        if(canStartGame)
         {
             //if there is, start the game
             if (canMoveToNext) MoveSpawnerToNextLocation(); //When spawner can move, move to next location

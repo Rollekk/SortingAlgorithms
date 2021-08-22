@@ -21,17 +21,17 @@ public class BSort : SortingAlgorithm
             {
                 array[i].SetCubeToColor(Color.blue); //mark as blue next cubes to check
                 array[i + 1].SetCubeToColor(Color.blue);  //mark as blue next cubes to check
-                yield return new WaitForSeconds(sortTime);
+                yield return new WaitForSeconds(sortSpeed);
 
                 //Check if current cubeNumber is bigger than next one
                 if (array[i].cubeNumber > array[i + 1].cubeNumber)
                 {
                     array[i].SetCubeToColor(Color.red);  //mark as red cubes to move
                     array[i + 1].SetCubeToColor(Color.red); //mark as red cubes to move
-                    yield return new WaitForSeconds(sortTime);
+                    yield return new WaitForSeconds(sortSpeed);
 
                     //Swap positions of cubes in game
-                    var tmp = array[i + 1].transform.position;
+                    Vector3 tmp = array[i + 1].transform.position;
                     array[i + 1].transform.position = array[i].transform.position;
                     array[i + 1].SetCubeToColor(Color.grey);  //mark as grey cubes already moved
 
@@ -42,7 +42,9 @@ public class BSort : SortingAlgorithm
                     CubeController temp = array[i + 1];
                     array[i + 1] = array[i];
                     array[i] = temp;
-                    yield return new WaitForSeconds(sortTime);
+                    swapCount++;
+                    gameUI.UpdateSwapCounterText(swapCount);
+                    yield return new WaitForSeconds(sortSpeed);
                 }
                 else
                 {

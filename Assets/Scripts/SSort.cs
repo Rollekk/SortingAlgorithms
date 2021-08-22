@@ -20,12 +20,12 @@ public class SSort : SortingAlgorithm
 
             int smallest = i; //set smallest cube to first in array
             array[i].SetCubeToColor(Color.magenta); //mark as magenta smallest cube
-            yield return new WaitForSeconds(sortTime);
+            yield return new WaitForSeconds(sortSpeed);
 
             for (int j = i + 1; j < array.Length; j++)
             {
                 array[j].SetCubeToColor(Color.blue); //mark as blue next cubes to check
-                yield return new WaitForSeconds(sortTime);
+                yield return new WaitForSeconds(sortSpeed);
 
                 //check if current cube is smaller than current smalles
                 if (array[j].cubeNumber < array[smallest].cubeNumber)
@@ -34,17 +34,17 @@ public class SSort : SortingAlgorithm
                     //if it is, set currenct cube as smallest
                     smallest = j;
                     array[smallest].SetCubeToColor(Color.magenta); //mark as magenta new smallest cube
-                    yield return new WaitForSeconds(sortTime);
+                    yield return new WaitForSeconds(sortSpeed);
                 }
                 else array[j].SetCubeToColor(Color.grey); //mark as grey cubes already checked
             }
 
             array[smallest].SetCubeToColor(Color.red); //mark as red cubes to move
             array[i].SetCubeToColor(Color.red);  //mark as red cubes to move
-            yield return new WaitForSeconds(sortTime);
+            yield return new WaitForSeconds(sortSpeed);
 
             //Swap positions of cubes in game
-            var tmp = array[smallest].transform.position;
+            Vector3 tmp = array[smallest].transform.position;
             array[smallest].transform.position = array[i].transform.position;
             array[smallest].SetCubeToColor(Color.grey);  //mark as grey cubes already moved
 
@@ -56,7 +56,9 @@ public class SSort : SortingAlgorithm
             array[i] = temp;
 
             array[i].SetCubeToColor(Color.green); //mark as green cube in place
-            yield return new WaitForSeconds(sortTime);
+            swapCount++;
+            gameUI.UpdateSwapCounterText(swapCount);
+            yield return new WaitForSeconds(sortSpeed);
         }
         array[array.Length - 1].SetCubeToColor(Color.green); //mark as green last cube when iteration is over
     }

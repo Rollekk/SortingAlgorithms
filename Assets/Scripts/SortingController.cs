@@ -11,19 +11,7 @@ public class SortingController : MonoBehaviour
     [Header("Sorting")]
     public bool isSorting = false; //is algorithm sorting at that moment
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //Apply chosen sorting algorithm to cubes
+    //Apply chosen sorting algorithm to cubes, return sorted list with cubes
     public List<CubeController> SortAllCubes(List<CubeController> spawnedCubes)
     {
         chosenAlgorithm = spawnerController.chosenAlgorithm;
