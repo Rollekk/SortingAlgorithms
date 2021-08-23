@@ -16,7 +16,7 @@ public class GameUIController : MonoBehaviour
 
     [Header("Sliders")]
     [SerializeField] TMP_Text sortingNumberTMP = null; //TMP for sorting number slider text
-    public float sortingSpeed = 0.1f;
+    public float sortingSpeed = 0.3f;
 
     [SerializeField] TMP_Text cubesNumberTMP = null; //TMP for sorting number slider text
     public int cubesNumber;
@@ -40,9 +40,10 @@ public class GameUIController : MonoBehaviour
         swapTMP.transform.parent.gameObject.SetActive(false);
 
         //Set slider text to 0 on start
-        sortingNumberTMP.text = "0,1";
+        sortingNumberTMP.text = "0,3";
         cubesNumberTMP.text = "5";
         cubesNumber = 5;
+        sortingSpeed = 0.3f;
     }
 
     //Hide start UI with options
@@ -83,5 +84,11 @@ public class GameUIController : MonoBehaviour
     {
         cubesNumber = (int) sliderValue;
         cubesNumberTMP.text = sliderValue.ToString();
+    }
+
+    //Exit game
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

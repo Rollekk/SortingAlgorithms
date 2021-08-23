@@ -18,6 +18,7 @@ public class SortingController : MachineController
     CubeController rightCube = null;
 
     bool shouldDropCube = false;
+    bool shouldTakeLeft = true;
 
     [Header("Sorting")]
     public bool isSorting = false; //is algorithm sorting at that moment
@@ -33,6 +34,7 @@ public class SortingController : MachineController
     {
         chosenAlgorithm = spawnerController.chosenAlgorithm;
 
+        //set sorting machine location to first cube
         transform.position = new Vector3(spawnedCubes[0].transform.position.x, transform.position.y, spawnedCubes[0].transform.position.z);
         yield return new WaitForSeconds(1.0f);
 
@@ -51,55 +53,114 @@ public class SortingController : MachineController
 
     }
 
-    public void PickupCube(CubeController cubeToPickup)
+    //Pickup cube on sorting machine
+    //cubeToPickup is cube being picked up
+    //shouldTakeLeft marks if cube should be placed on left or right
+    public void PickupCube(CubeController cubeToPickup, bool shouldTakeLeft)
     {
-        if (!leftCube)
+        //check if should be put in left slot
+        if (shouldTakeLeft)
         {
+            //set initial cube position to current cube position
             initialLeftCubePosition = cubeToPickup.transform.position;
+            //set cube transform to sorting machine transform
             cubeToPickup.transform.position = leftCubeTransform.position;
             cubeToPickup.transform.parent = leftCubeTransform;
+            //set picked up cube to given in parameter
             leftCube = cubeToPickup;
         }
         else
         {
+            //set initial cube position to current cube position
             initialRightCubePosition = cubeToPickup.transform.position;
+            //set cube transform to sorting machine transform
             cubeToPickup.transform.position = rightCubeTransform.position;
             cubeToPickup.transform.parent = rightCubeTransform;
+            //set picked up cube to given in parameter
             rightCube = cubeToPickup;
         }
     }
 
-    public void PutDownCube(bool shouldSwap)
+    //Put down cube in place
+    //shouldSwap places with other cube on sorting machine
+    //shouldTakeLeft marks if cube should be placed on left or right
+    public void PutDownCube(bool shouldSwap, bool shouldTakeLeft)
     {
-        if (leftCube)
+        //check if should be put in left slot
+        if (shouldTakeLeft)
         {
-            if(shouldSwap) SetNewLocation(initialRightCubePosition.x);
-            else SetNewLocation(initialLeftCubePosition.x);
+            //check if should swap positions
+            if(shouldSwap) SetNewLocation(initialRightCubePosition.x); //sets position to initial position
+            else SetNewLocation(initialLeftCubePosition.x); //sets position to initial position
         }
         else
         {
-            if(shouldSwap) SetNewLocation(initialLeftCubePosition.x);
-            else SetNewLocation(initialRightCubePosition.x);
+            if(shouldSwap) SetNewLocation(initialLeftCubePosition.x); //sets position to initial position
+            else SetNewLocation(initialRightCubePosition.x); //sets position to initial position
         }
-
+        //should sorting machine move to next position
         canMoveToNext = true;
+        //should cube be dropped
         shouldDropCube = true;
+        this.shouldTakeLeft = shouldTakeLeft;
     }
 
+    //Drop cube in position
     void DropCube()
     {
-        if(leftCube)
+        //check which cube to drop
+        if (shouldTakeLeft)
         {
-            leftCube.transform.parent = null;
-            leftCube.transform.position = spawnTransform.position;
-            leftCube = null;
+            //check if there is cube
+            if(leftCube)
+            {
+                //set cube transform to null
+                leftCube.transform.parent = null;
+                //set cube position to spawn position
+                leftCube.transform.position = spawnTransform.position;
+                //set cube to null
+                leftCube = null;
+            }
         }
         else
         {
-            rightCube.transform.parent = null;
-            rightCube.transform.position = spawnTransform.position;
-            rightCube = null;
+            //check if there is cube
+            if (rightCube)
+            {
+                //set cube transform to null
+                rightCube.transform.parent = null;
+                //set cube position to spawn position
+                rightCube.transform.position = spawnTransform.position;
+                //set cube to null
+                rightCube = null;
+            }
         }
+        //set to drop cube to false so it's called only once
         shouldDropCube = false;
+    }
+
+    //Put down cube in place
+    //cube to put down
+    public void PutDownCube(CubeController cube)
+    {
+        //check on which side the cube is on
+        if (cube == leftCube)
+        {
+            //set sorting machine new location
+            SetNewLocation(initialLeftCubePosition.x);
+            //set shouldTakeLeft to true, to drop left cube
+            shouldTakeLeft = true;
+        }
+        else
+        {
+            //set sorting machine new location
+            SetNewLocation(initialRightCubePosition.x);
+            //set shouldTakeLeft to true, to drop right cube
+            shouldTakeLeft = false;
+        }
+        //should sorting machine move to next position
+        canMoveToNext = true;
+        //should cube be dropped
+        shouldDropCube = true;
     }
 }

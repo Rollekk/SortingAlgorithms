@@ -26,7 +26,7 @@ public class SSort : SortingAlgorithm
             yield return new WaitForSeconds(sortSpeed);
 
             //Pickup first smallest cube
-            sortingController.PickupCube(array[i]);
+            sortingController.PickupCube(array[i], true);
             yield return new WaitForSeconds(sortSpeed);
 
             for (int j = i + 1; j < array.Length; j++)
@@ -40,7 +40,7 @@ public class SSort : SortingAlgorithm
                 if (array[j].cubeNumber < array[smallest].cubeNumber)
                 {
                     //Drop smallest cube in initial position
-                    sortingController.PutDownCube(false);
+                    sortingController.PutDownCube(false, true);
                     yield return new WaitForSeconds(sortSpeed);
 
                     array[smallest].SetCubeToColor(Color.grey); //mark as grey previous smallest cube
@@ -53,7 +53,7 @@ public class SSort : SortingAlgorithm
                     sortingController.SetNewLocation(array[smallest].transform.position.x);
                     
                     //Pickup new smallest cube
-                    sortingController.PickupCube(array[j]);
+                    sortingController.PickupCube(array[j], true);
                     yield return new WaitForSeconds(sortSpeed);
                 }
                 else array[j].SetCubeToColor(Color.grey); //mark as grey cubes already checked
@@ -63,21 +63,21 @@ public class SSort : SortingAlgorithm
             array[i].SetCubeToColor(Color.red);  //mark as red cubes to move
 
             //Put down second cube in first cube position
-            if (i == smallest) sortingController.PutDownCube(false);
+            if (i == smallest) sortingController.PutDownCube(false, true);
             else
             {
                 //Set new sortingMachine location to nextPickupCube location
                 sortingController.SetNewLocation(array[i].transform.position.x);
                 //Pickup next cube to swap places with
-                sortingController.PickupCube(array[i]);
+                sortingController.PickupCube(array[i], false);
                 yield return new WaitForSeconds(sortSpeed);
 
                 //Put down first cube in second cube position
-                sortingController.PutDownCube(true);
+                sortingController.PutDownCube(true, true);
                 yield return new WaitForSeconds(sortSpeed);
 
                 //Put down second cube in first cube position
-                sortingController.PutDownCube(true);
+                sortingController.PutDownCube(true, false);
 
                 array[smallest].SetCubeToColor(Color.grey);  //mark as grey cubes already moved
 

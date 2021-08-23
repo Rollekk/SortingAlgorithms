@@ -49,13 +49,14 @@ public class CubeController : MonoBehaviour
             shouldSet = false;
         }
     }
-
+    //Set cube color to given in parameter
     public void SetCubeToColor(Color color)
     {
         //if(gameObject.GetComponent<Renderer>().sharedMaterial.color != Color.green)
             gameObject.GetComponent<Renderer>().sharedMaterial.color = color;
     }
 
+    //Reset cube color to initial color
     public void ResetCubeColor()
     {
         if (gameObject.GetComponent<Renderer>().sharedMaterial.color != Color.green)

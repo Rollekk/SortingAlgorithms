@@ -27,8 +27,8 @@ public class BSort : SortingAlgorithm
                 yield return new WaitForSeconds(sortSpeed);
 
                 //Pickup both cubes and place them in sorting machine
-                sortingController.PickupCube(array[i]);
-                sortingController.PickupCube(array[i + 1]);
+                sortingController.PickupCube(array[i], true);
+                sortingController.PickupCube(array[i + 1], false);
                 yield return new WaitForSeconds(sortSpeed);
 
                 //Check if current cubeNumber is bigger than next one
@@ -39,11 +39,11 @@ public class BSort : SortingAlgorithm
                     yield return new WaitForSeconds(sortSpeed);
 
                     //Put down first cube in second cube position
-                    sortingController.PutDownCube(true);
+                    sortingController.PutDownCube(true, true);
                     yield return new WaitForSeconds(sortSpeed);
 
                     //Put down second cube in first cube position
-                    sortingController.PutDownCube(true);
+                    sortingController.PutDownCube(true, false);
 
                     //mark as grey cubes already moved
                     array[i + 1].SetCubeToColor(Color.grey);  
@@ -59,11 +59,11 @@ public class BSort : SortingAlgorithm
                 else
                 {
                     //Put down first cube in initial position
-                    sortingController.PutDownCube(false);
+                    sortingController.PutDownCube(false, true);
                     yield return new WaitForSeconds(sortSpeed);
 
                     //Put down second cube in initial position
-                    sortingController.PutDownCube(false);
+                    sortingController.PutDownCube(false, false);
 
                     //mark as grey cubes already checked
                     array[i].SetCubeToColor(Color.grey); 
