@@ -45,7 +45,7 @@ public class SpawnerController : MachineController
     void SpawnNewCube()
     {
         //Spawn new cube and set its parameters
-        spawnedCube = Instantiate(cubeToSpawn, spawnTransform.position, transform.rotation).GetComponentInChildren<CubeController>();
+        spawnedCube = Instantiate(cubeToSpawn, spawnTransform.position, cubeToSpawn.transform.rotation).GetComponentInChildren<CubeController>();
         //Generate cube number
         spawnedCube.GenerateCubeNumber();
         spawnedCube.spawnerController = this;
