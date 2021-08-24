@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae2eb28dcd42cc44964ed7376f6b704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerMoveSpeed: 15
+  spawnerMoveSpeed: 8
   spawnerStep: 0.6
   canMoveToNext: 0
   spawnerStartingLocation: {x: 0, y: 0, z: 0}
@@ -104,8 +104,7 @@ MonoBehaviour:
   spawnTransform: {fileID: 7525357026107602303}
   chosenAlgorithm: {fileID: 0}
   sortingController: {fileID: 0}
-  cubeToSpawn: {fileID: 7540563399978626908, guid: 5f99cf28a4e1557429be22b91a668ca9, type: 3}
-  anim: {fileID: 0}
+  cubeToSpawn: {fileID: 3634140147229593922, guid: 6e3f0881a63af394898da34c809fb90e, type: 3}
   spawnedCubes: []
   maxSpawnedObjects: 10
   canStartGame: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class MachineController : MonoBehaviour
 {
     [Header("Position")]
+    protected float initialPosY = 0.0f; //initial machine positionY
     protected float lerpTimer = 0.0f; //Timer for lerping between two vectors
     [SerializeField] protected float spawnerMoveSpeed = 0.1f; //Speed withi which spawner is moving
     [SerializeField] protected float spawnerStep = 0.5f; //Amount of distance between points that spawn cubes
@@ -16,6 +17,11 @@ public class MachineController : MonoBehaviour
     [SerializeField] protected bool isSpawned = false; //can next cube be spawned
 
     [SerializeField] protected Transform spawnTransform = null; //spawnPoint transform
+
+    protected virtual void Start()
+    {
+        initialPosY = transform.position.y;
+    }
 
     //Move spanwer object to next position
     protected void MoveToNextLocation()

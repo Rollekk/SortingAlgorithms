@@ -12,12 +12,16 @@ public class SpawnerController : MachineController
 
     [Header("Cubes")]
     [SerializeField] List<CubeController> spawnedCubes = new List<CubeController>(); //list of spawnedCubes
-
     public int maxSpawnedObjects = 10; //maximum objects that can be spawned
     int numberOfSpawnedCubes = 0; //current number of spawned objects
 
     [Header("Spawner")]
     public bool canStartGame = false; //can the game be started/ui is hidden, algorithm is chosen
+
+    protected override void Start()
+    {
+        base.Start();
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,20 +34,20 @@ public class SpawnerController : MachineController
             else if (!isSpawned && numberOfSpawnedCubes < maxSpawnedObjects) //If spawner can't move, spawn another cube
             {
                 isSpawned = true;
-                SpawnNewCube();
+                StartCoroutine(SpawnNewCube());
             }
             //If its not sorting currenlty and all cubes have been spawned, Sort with selected algirthm
             if (!sortingController.isSorting && !isSpawned && numberOfSpawnedCubes >= maxSpawnedObjects)
             {
-                sortingController.StartCoroutine(sortingController.StartSorting(spawnedCubes));
-                gameObject.SetActive(false);
+                HideTube();
             }
         }
     }
 
     //Spawn new cube, set its parameters and add it to list
-    void SpawnNewCube()
+    IEnumerator SpawnNewCube()
     {
+        yield return null;
         //Spawn new cube and set its parameters
         spawnedCube = Instantiate(cubeToSpawn, spawnTransform.position, cubeToSpawn.transform.rotation).GetComponentInChildren<CubeController>();
         //Generate cube number
@@ -55,5 +59,20 @@ public class SpawnerController : MachineController
 
         //Increment number of generated cubes
         numberOfSpawnedCubes++;
+    }
+
+    void HideTube()
+    {
+        transform.position = Vector3.Lerp(new Vector3(transform.position.x, initialPosY, transform.position.z),
+            new Vector3(transform.position.x, initialPosY + 5.0f, transform.position.z), lerpTimer);
+        lerpTimer += Time.deltaTime;
+
+        if (transform.position.y == initialPosY + 5.0f)
+        {
+            sortingController.StartCoroutine(sortingController.StartSorting(spawnedCubes));
+            lerpTimer = 0.0f;
+            gameObject.SetActive(false);
+        }
+
     }
 }

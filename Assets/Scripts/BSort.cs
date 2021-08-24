@@ -31,6 +31,9 @@ public class BSort : SortingAlgorithm
                 sortingController.PickupCube(array[i + 1], false);
                 yield return new WaitForSeconds(sortSpeed);
 
+                swapCount++;
+                gameUI.UpdateSwapCounterText(swapCount);
+
                 //Check if current cubeNumber is bigger than next one
                 if (array[i].cubeNumber > array[i + 1].cubeNumber)
                 {
@@ -53,8 +56,6 @@ public class BSort : SortingAlgorithm
                     CubeController temp = array[i + 1];
                     array[i + 1] = array[i];
                     array[i] = temp;
-                    swapCount++;
-                    gameUI.UpdateSwapCounterText(swapCount);
                 }
                 else
                 {

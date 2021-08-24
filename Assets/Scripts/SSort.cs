@@ -36,6 +36,9 @@ public class SSort : SortingAlgorithm
                 sortingController.SetNewLocation(array[j].transform.position.x);
                 yield return new WaitForSeconds(sortSpeed);
 
+                swapCount++;
+                gameUI.UpdateSwapCounterText(swapCount);
+
                 //check if current cube is smaller than current smalles
                 if (array[j].cubeNumber < array[smallest].cubeNumber)
                 {

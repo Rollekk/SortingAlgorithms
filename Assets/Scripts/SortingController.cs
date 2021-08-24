@@ -22,35 +22,43 @@ public class SortingController : MachineController
 
     [Header("Sorting")]
     public bool isSorting = false; //is algorithm sorting at that moment
+    bool shouldMoveTube = false;
+
+    protected override void Start()
+    {
+        base.Start();
+    }
 
     private void Update()
     {
         if (canMoveToNext) MoveToNextLocation();
         else if (shouldDropCube) DropCube();
+
+        if (shouldMoveTube) MoveTube();
     }
 
     //Apply chosen sorting algorithm to cubes
     public IEnumerator StartSorting(List<CubeController> spawnedCubes)
     {
         chosenAlgorithm = spawnerController.chosenAlgorithm;
-
-        //set sorting machine location to first cube
-        transform.position = new Vector3(spawnedCubes[0].transform.position.x, transform.position.y, spawnedCubes[0].transform.position.z);
+        shouldMoveTube = true;
         yield return new WaitForSeconds(1.0f);
 
-        //Create init array made of cube list
-        CubeController[] tmpArray = spawnedCubes.ToArray();
+        if(!shouldMoveTube)
+        {
+            //Create init array made of cube list
+            CubeController[] tmpArray = spawnedCubes.ToArray();
 
-        //Set sortingController to this
-        chosenAlgorithm.sortingController = this;
-        //Sort just array 
-        StartCoroutine(chosenAlgorithm.Sort(tmpArray, 0, spawnedCubes.Count - 1));
+            //Set sortingController to this
+            chosenAlgorithm.sortingController = this;
+            //Sort just array 
+            StartCoroutine(chosenAlgorithm.Sort(tmpArray, 0, spawnedCubes.Count - 1));
 
-        //Clear list and add all sorted elements
-        spawnedCubes.Clear();
-        spawnedCubes.AddRange(tmpArray);
-        isSorting = true;
-
+            //Clear list and add all sorted elements
+            spawnedCubes.Clear();
+            spawnedCubes.AddRange(tmpArray);
+            isSorting = true;
+        }
     }
 
     //Pickup cube on sorting machine
@@ -162,5 +170,23 @@ public class SortingController : MachineController
         canMoveToNext = true;
         //should cube be dropped
         shouldDropCube = true;
+    }
+
+    //Moves tube to screen
+    void MoveTube()
+    {
+        //Lerp through current position to current position - 5.0f
+        transform.position = Vector3.Lerp(new Vector3(transform.position.x, initialPosY, transform.position.z),
+            new Vector3(transform.position.x, initialPosY - 5.0f, transform.position.z), lerpTimer);
+        lerpTimer += Time.deltaTime * 1.5f;
+
+        //Check if tube is in position
+        if (transform.position.y == initialPosY - 5.0f)
+        {
+            //restart timer
+            lerpTimer = 0.0f;
+            //stop moving tube
+            shouldMoveTube = false;
+        }
     }
 }

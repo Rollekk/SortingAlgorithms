@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2b65ef0ba4e624aa27d3e9dff32c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerMoveSpeed: 15
+  spawnerMoveSpeed: 5
   spawnerStep: 0.6
   canMoveToNext: 0
   spawnerStartingLocation: {x: 0, y: 0, z: 0}

@@ -56,7 +56,7 @@ public class GameUIController : MonoBehaviour
     //Update swap counter TMP.text
     public void UpdateSwapCounterText(int swapsNumber)
     {
-        swapTMP.text = "Swaps: " + swapsNumber.ToString();
+        swapTMP.text = "Comparisons: " + swapsNumber.ToString();
     }
 
     //Set algorithm name TMP.text

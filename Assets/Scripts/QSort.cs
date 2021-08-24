@@ -45,6 +45,10 @@ public class QSort : SortingAlgorithm
             sortingController.PickupCube(array[j], false);
             yield return new WaitForSeconds(sortSpeed);
 
+            //Add and update comparison counter
+            swapCount++;
+            gameUI.UpdateSwapCounterText(swapCount);
+
             //if number in array on left is less than pivot...
             while (array[i].cubeNumber < pivot.cubeNumber)
             {
@@ -71,6 +75,9 @@ public class QSort : SortingAlgorithm
 
                     //Pickup first smallest cube
                     sortingController.PickupCube(array[i], true);
+                    //Add and update comparison counter
+                    swapCount++;
+                    gameUI.UpdateSwapCounterText(swapCount);
                     yield return new WaitForSeconds(sortSpeed);
                 }
             }
@@ -100,6 +107,9 @@ public class QSort : SortingAlgorithm
 
                     //Pickup first smallest cube
                     sortingController.PickupCube(array[j], false);
+                    //Add and update comparison counter
+                    swapCount++;
+                    gameUI.UpdateSwapCounterText(swapCount);
                     yield return new WaitForSeconds(sortSpeed);
                 }
             }
@@ -107,13 +117,6 @@ public class QSort : SortingAlgorithm
             //check if left index is not on right index
             if (i <= j)
             {
-                //counts only swapping two cubes
-                if (i != j)
-                {
-                    swapCount++;
-                    gameUI.UpdateSwapCounterText(swapCount);
-                }
-
                 //mark as blue cubes that will be moved
                 array[i].SetCubeToColor(Color.red);
                 array[j].SetCubeToColor(Color.red);
